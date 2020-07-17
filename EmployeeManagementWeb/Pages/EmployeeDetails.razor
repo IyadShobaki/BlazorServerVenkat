@@ -3,8 +3,13 @@
 @inherits EmployeeDetailsBase
 
 <h3>EmployeeDetails</h3>
-
-<civ class="row justify-content-center m-3">
+@if (Employee == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+<div class="row justify-content-center m-3">
     <div class="col-sm-8">
         <div class="card">
             <div class="card-header">
@@ -16,7 +21,7 @@
 
                 <h4>Employee ID : @Employee.EmployeeId</h4>
                 <h4>Email : @Employee.Email</h4>
-                <h4>Department : @Employee.DepartmentId</h4>
+                <h4>Department : @(Employee.Department == null ? "N/A" : Employee.Department.DepartmentName)</h4>
             </div>
             <div class="card-footer text-center">
                 <a href="/" class="btn btn-primary">Back</a>
@@ -25,4 +30,5 @@
             </div>
         </div>
     </div>
-</civ>
+</div>
+}
