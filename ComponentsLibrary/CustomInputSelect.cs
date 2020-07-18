@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementWeb.Pages
+namespace ComponentsLibrary
 {
     public class CustomInputSelect<TValue> : InputSelect<TValue>
     {
