@@ -83,7 +83,7 @@ namespace EmployeeManagementApi.Controllers
                 {
                     return BadRequest();
                 }
-                var emp = _employeeRepository.GetEmployeeByEmail(employee.Email);
+                var emp = await _employeeRepository.GetEmployeeByEmail(employee.Email);
 
                 if (emp != null)
                 {
