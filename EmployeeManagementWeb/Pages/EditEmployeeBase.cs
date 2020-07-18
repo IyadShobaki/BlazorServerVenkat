@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementModels.Models;
+using EmployeeManagementWeb.Models;
 using EmployeeManagementWeb.Services;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -13,7 +14,9 @@ namespace EmployeeManagementWeb.Pages
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
 
-        public Employee Employee { get; set; } = new Employee();
+        private Employee Employee { get; set; } = new Employee();
+
+        public EditEmployeeModel EditEmployeeModel { get; set; } = new EditEmployeeModel();
 
         [Inject]
         public IDepartmentService DepartmentService { get; set; }
@@ -26,6 +29,22 @@ namespace EmployeeManagementWeb.Pages
         {
             Employee = await EmployeeService.GetEmployee(int.Parse(Id));
             Departments = (await DepartmentService.GetDepartments()).ToList();
+
+            EditEmployeeModel.EmployeeId = Employee.EmployeeId;
+            EditEmployeeModel.FirstName = Employee.FirstName;
+            EditEmployeeModel.LastName = Employee.LastName;
+            EditEmployeeModel.Email = Employee.Email;
+            EditEmployeeModel.ConfirmEmail = Employee.Email;
+            EditEmployeeModel.DateOfBirth = Employee.DateOfBirth;
+            EditEmployeeModel.Gender = Employee.Gender;
+            EditEmployeeModel.PhotoPath = Employee.PhotoPath;
+            EditEmployeeModel.DepartmentId = Employee.DepartmentId;
+            EditEmployeeModel.Department = Employee.Department;
+        }
+
+        protected void HandleValidSubmit()
+        {
+
         }
     }
 }
