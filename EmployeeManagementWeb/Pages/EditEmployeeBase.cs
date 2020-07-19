@@ -4,15 +4,19 @@ using EmployeeManagementModels.Models;
 using EmployeeManagementWeb.Models;
 using EmployeeManagementWeb.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace EmployeeManagementWeb.Pages
 {
     public class EditEmployeeBase : ComponentBase
     {
+        [CascadingParameter]
+        public Task<AuthenticationState> authenticationStateTask { get; set; }
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
 
@@ -37,6 +41,13 @@ namespace EmployeeManagementWeb.Pages
 
         protected async override Task OnInitializedAsync()
         {
+            var authenticationState = await authenticationStateTask;
+
+            if (!authenticationState.User.Identity.IsAuthenticated)
+            {
+                string returnUrl = WebUtility.UrlEncode($"/editemployee/{Id}");
+                NavigationManager.NavigateTo($"/identity/account/login?returnUrl={returnUrl}");
+            }
             int.TryParse(Id, out int employeeId);
             if (employeeId != 0)
             {
