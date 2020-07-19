@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ComponentsLibrary;
 using EmployeeManagementModels.Models;
 using EmployeeManagementWeb.Models;
 using EmployeeManagementWeb.Services;
@@ -73,8 +74,7 @@ namespace EmployeeManagementWeb.Pages
         {
             Mapper.Map(EditEmployeeModel, Employee);
 
-            Employee result = null;
-
+            Employee result;
             if (Employee.EmployeeId != 0)
             {
                 result = await EmployeeService.UpdateEmployee(Employee);
@@ -91,11 +91,28 @@ namespace EmployeeManagementWeb.Pages
             }
         }
 
-        protected async Task Delete_Click()
+        //protected async Task Delete_Click()
+        //{
+        //    await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+        //    System.Threading.Thread.Sleep(1000);
+        //    NavigationManager.NavigateTo("/");
+        //}
+
+
+        public ConfirmBase DeleteConfirmation { get; set; }
+
+        protected void Delete_Click()
         {
-            await EmployeeService.DeleteEmployee(Employee.EmployeeId);
-            System.Threading.Thread.Sleep(1000);
-            NavigationManager.NavigateTo("/");
+            DeleteConfirmation.Show();
+
+        }
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+                NavigationManager.NavigateTo("/");
+            }
         }
     }
 }
