@@ -1,5 +1,5 @@
 ﻿@*<h1 style="@ElementStyle">-Child Component Text. Employee Age = @EmpAge</h1>*@
-    <h1 style="@ElementStyle; @H1Border">-Child Component Text.</h1>
+    <h1 style="@ElementStyle; @H1Border">-Child Component Text - @Counter</h1>
 
 <GrandChildComponent></GrandChildComponent>
 
@@ -10,6 +10,8 @@
     [CascadingParameter(Name = "BorderStyle")]
     public string H1Border { get; set; }
     //public int EmpAge { get; set; }
+    [CascadingParameter(Name ="Counter")]
+    public int Counter { get; set; }
 }
 
 @*<input id="firstName" placeholder="Child Component Placeholder Text" />
