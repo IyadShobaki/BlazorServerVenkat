@@ -2,14 +2,20 @@
 
 <h1 style="@Style">Parent Component Text</h1>
 
-<CascadingValue Value="@Style">
-    <ChildComponent></ChildComponent>
+<CascadingValue Value="@Style" Name="ColorStyle">
+    <CascadingValue Value="@BorderStyle" Name="BorderStyle">
+        <ChildComponent></ChildComponent>
+    </CascadingValue>
 </CascadingValue>
 
 
 @code{
     public string Style { get; set; } = "color:red";
+    //public int EmployeeAge { get; set; } = 25;
+    public string BorderStyle { get; set; } = "border:1px solid red";
 }
+
+
 
 @*<ChildComponent placeholder="Parent Component Placeholder Text" maxlength="100"
                         size="50" required="required">
